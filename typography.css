@@ -1,0 +1,70 @@
+/* Larger, more legible supporting typography */
+.brand,
+.desktop-nav,
+.nav-cta { font-size: 14px; }
+
+.eyebrow,
+.section-label { font-size: 12px; }
+
+.hero-copy { width: min(520px, 100%); font-size: 18px; }
+.button,
+.text-link { font-size: 14px; }
+.hero-meta { gap: 64px; }
+.hero-meta span { font-size: 13px; }
+.hero-scroll { font-size: 11px; }
+.hero-meta strong { font-size: 18px; }
+.hero-meta small { font-size: 14px; }
+.intro-copy { font-size: 19px; }
+.statement p { font-size: 18px; max-width: 410px; }
+.benefit-grid span,
+.audience-list span { font-size: 12px; }
+.benefit-grid h3 { font-size: 25px; }
+.benefit-grid p { font-size: 16px; }
+.audience-list p { font-size: 20px; }
+.timeline-item time { font-size: 13px; }
+.timeline-item h3 { font-size: 23px; }
+.timeline-item p { font-size: 16px; }
+.memory-swiper figcaption,
+.number-grid span,
+.quote-swiper p { font-size: 14px; }
+.faq summary { font-size: 19px; }
+.faq details p { font-size: 16px; }
+.rsvp > p { font-size: 16px; }
+.rsvp .rsvp-link {
+  display: inline-flex;
+  margin: 34px auto 12px;
+  padding: 17px 24px;
+}
+.rsvp-form input { font-size: 15px; }
+.form-note { font-size: 12px !important; }
+footer { font-size: 14px; }
+footer small { font-size: 12px; }
+
+/* Keep the Hero balanced on shorter desktop screens. */
+@media (min-width: 721px) and (max-height: 850px) {
+  .hero { min-height: 760px; padding-top: 128px; }
+  .hero h1 {
+    font-size: clamp(4.5rem, 8.6vw, 8rem);
+    margin-top: clamp(58px, 9vh, 82px);
+    margin-bottom: 20px;
+  }
+  .hero-copy { font-size: 16px; }
+  .hero-actions { margin-top: 24px; }
+  .hero-meta { margin-top: 46px; padding-bottom: 0; }
+  .hero:after { display: none; }
+}
+
+@media (max-width: 720px) {
+  .hero-meta { gap: 22px; }
+  .hero-meta span { font-size: 11px; }
+  .hero-meta strong { font-size: 15px; }
+  .hero-meta small { font-size: 12px; }
+  .hero-copy { font-size: 16px; }
+  .intro-copy,
+  .statement p { font-size: 17px; }
+  .benefit-grid p,
+  .timeline-item p,
+  .faq details p { font-size: 15px; }
+  .audience-list p { font-size: 17px; }
+  .faq summary { font-size: 17px; }
+}
