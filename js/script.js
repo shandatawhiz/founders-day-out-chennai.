@@ -59,13 +59,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.gsap && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
-    gsap.from('.hero h1 .line', {
-      y: 55,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.12,
-      ease: 'power3.out',
-      delay: 0.2
-    });
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+      gsap.from('.hero h1 .line', {
+        y: 55,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.12,
+        ease: 'power3.out',
+        delay: 0.2
+      });
+
+      gsap.to('.orb-one', {
+        yPercent: 22,
+        xPercent: -8,
+        scale: 1.08,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
+
+      gsap.to('.orb-two', {
+        yPercent: -18,
+        xPercent: 10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5
+        }
+      });
+
+      gsap.from('.statement-image.gamistry-statement-image', {
+        scale: 1.08,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.statement',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2
+        }
+      });
+
+      gsap.from('.timeline-item', {
+        x: 70,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.timeline-list',
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      gsap.from('.gallery-head', {
+        y: 45,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.gallery',
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    }
   }
 });
