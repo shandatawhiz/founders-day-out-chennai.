@@ -56,4 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }), { threshold: 0.35 });
     counters.forEach(counter => observer.observe(counter));
   } else counters.forEach(animateCounter);
+
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.hero h1 .line', {
+      y: 55,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+  }
 });
