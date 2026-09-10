@@ -28,9 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.Swiper) {
     const memory = document.querySelector('.memory-swiper');
     if (memory) new Swiper(memory, {
-      slidesPerView: 'auto', spaceBetween: 18,
+      slidesPerView: 'auto',
+      spaceBetween: 18,
       navigation: { nextEl: '.swiper-next', prevEl: '.swiper-prev' },
-      pagination: { el: '.swiper-pagination', clickable: true }
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoplay: reduceMotion ? false : { delay: 3600, disableOnInteraction: false, pauseOnMouseEnter: true },
+      speed: 650,
+      grabCursor: true
     });
 
     const quotes = document.querySelector('.quote-swiper');
