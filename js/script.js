@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.AOS) AOS.init({ duration: 800, once: true, offset: 70 });
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (window.AOS) AOS.init({ duration: 800, once: true, offset: 70, disable: reduceMotion });
 
   const header = document.querySelector('.site-header');
   const menuToggle = document.querySelector('.menu-toggle');
@@ -13,12 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const open = mobileNav.classList.toggle('is-open');
     menuToggle.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
 
   mobileNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
     mobileNav.classList.remove('is-open');
     menuToggle?.classList.remove('is-open');
     menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.setAttribute('aria-label', 'Open menu');
   }));
 
   if (window.Swiper) {
@@ -31,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const quotes = document.querySelector('.quote-swiper');
     if (quotes) new Swiper(quotes, {
-      slidesPerView: 1, autoHeight: true, effect: 'fade',
+      slidesPerView: 1, autoHeight: true, effect: reduceMotion ? 'slide' : 'fade',
       fadeEffect: { crossFade: true },
-      autoplay: { delay: 5500, disableOnInteraction: false },
+      autoplay: reduceMotion ? false : { delay: 5500, disableOnInteraction: false },
       pagination: { el: '.quote-pagination', clickable: true }
     });
   }
@@ -41,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const counters = document.querySelectorAll('[data-count]');
   const animateCounter = el => {
     const target = Number(el.dataset.count || 0);
+    if (reduceMotion) { el.textContent = String(target); return; }
     const start = performance.now();
     const tick = now => {
       const progress = Math.min((now - start) / 1000, 1);
@@ -57,81 +62,54 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => observer.observe(counter));
   } else counters.forEach(animateCounter);
 
-  if (window.gsap && window.ScrollTrigger) {
+  if (window.gsap && window.ScrollTrigger && !reduceMotion) {
     gsap.registerPlugin(ScrollTrigger);
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.from('.hero h1 .line', {
+      y: 55,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.12,
+      ease: 'power3.out',
+      delay: 0.2
+    });
 
-    if (!reduceMotion) {
-      gsap.from('.hero h1 .line', {
-        y: 55,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: 'power3.out',
-        delay: 0.2
-      });
+    gsap.to('.orb-one', {
+      yPercent: 22,
+      xPercent: -8,
+      scale: 1.08,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 }
+    });
 
-      gsap.to('.orb-one', {
-        yPercent: 22,
-        xPercent: -8,
-        scale: 1.08,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2
-        }
-      });
+    gsap.to('.orb-two', {
+      yPercent: -18,
+      xPercent: 10,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+    });
 
-      gsap.to('.orb-two', {
-        yPercent: -18,
-        xPercent: 10,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.5
-        }
-      });
+    gsap.from('.statement-image.gamistry-statement-image', {
+      scale: 1.08,
+      ease: 'none',
+      scrollTrigger: { trigger: '.statement', start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+    });
 
-      gsap.from('.statement-image.gamistry-statement-image', {
-        scale: 1.08,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.statement',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1.2
-        }
-      });
+    gsap.from('.timeline-item', {
+      x: 70,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.timeline-list', start: 'top 78%', toggleActions: 'play none none reverse' }
+    });
 
-      gsap.from('.timeline-item', {
-        x: 70,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.timeline-list',
-          start: 'top 78%',
-          toggleActions: 'play none none reverse'
-        }
-      });
-
-      gsap.from('.gallery-head', {
-        y: 45,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.gallery',
-          start: 'top 78%',
-          toggleActions: 'play none none reverse'
-        }
-      });
-    }
+    gsap.from('.gallery-head', {
+      y: 45,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '.gallery', start: 'top 78%', toggleActions: 'play none none reverse' }
+    });
   }
 });
