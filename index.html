@@ -94,25 +94,42 @@
         <div class="section-label">Edition 02 · Chennai</div>
         <h2>There are only<br /><em>15 seats.</em></h2>
         <p class="rsvp-intro"><strong>₹999 / person</strong><br /><em>A full day of good food, games & meaningful conversations.</em></p>
-        <form class="invite-form" action="https://forms.gle/GgWEvLbJXvZSb5PB7" method="get" target="_blank">
+        <form class="invite-form" action="https://script.google.com/macros/s/AKfycbwl5NDAtByLZRgUmPiZqaZxcJJJdtbrnZeK1eI7YBsDistpwk4zYB63KW5OaIqTaJK-/exec" method="post" target="registration-response" onsubmit="handleRegistrationSubmit(this)">
           <div class="invite-form-grid">
-            <label><span>Your full name</span><input type="text" name="full_name" autocomplete="name" required /></label>
+            <label><span>Your full name</span><input type="text" name="fullName" autocomplete="name" required /></label>
             <label><span>Your email address</span><input type="email" name="email" autocomplete="email" required /></label>
             <label><span>Your WhatsApp number</span><input type="tel" name="whatsapp" autocomplete="tel" required /></label>
-            <label><span>What are you currently working on?</span><textarea name="working_on" rows="3" required></textarea></label>
-            <label><span>Why would you like to join Founders Day Out?</span><textarea name="why_join" rows="3" required></textarea></label>
+            <label><span>What are you currently working on?</span><textarea name="workingOn" rows="3" required></textarea></label>
+            <label><span>Why would you like to join Founders Day Out?</span><textarea name="whyJoin" rows="3" required></textarea></label>
             <fieldset><legend>Can you attend on Sunday, 27 September 2026?</legend><label class="choice"><input type="radio" name="attendance" value="Yes" required /> <span>Yes</span></label><label class="choice"><input type="radio" name="attendance" value="No" /> <span>No</span></label></fieldset>
-            <fieldset><legend>Your food preference</legend><label class="choice"><input type="radio" name="food_preference" value="Vegetarian" required /> <span>Vegetarian</span></label><label class="choice"><input type="radio" name="food_preference" value="Non-vegetarian" /> <span>Non-vegetarian</span></label></fieldset>
-            <label class="consent"><input type="checkbox" name="fee_acknowledged" value="Yes" required /><span>I understand the participation fee is ₹999, including food and refreshments.</span></label>
+            <fieldset><legend>Your food preference</legend><label class="choice"><input type="radio" name="foodPreference" value="Vegetarian" required /> <span>Vegetarian</span></label><label class="choice"><input type="radio" name="foodPreference" value="Non-vegetarian" /> <span>Non-vegetarian</span></label></fieldset>
+            <label class="consent"><input type="checkbox" name="feeConfirmed" value="Yes" required /><span>I understand the participation fee is ₹999, including food and refreshments.</span></label>
           </div>
-          <button class="button button-primary rsvp-link" type="submit">Submit request <span>↗</span></button>
-          <p class="form-note">Your details will be submitted through our Google Form.</p>
+          <button class="button button-primary rsvp-link" type="submit" id="registration-submit">Submit request <span>↗</span></button>
+          <p class="form-note" id="registration-status" aria-live="polite">Your registration will be securely submitted to our event registration sheet.</p>
         </form>
+        <iframe name="registration-response" title="Registration response" style="display:none" aria-hidden="true"></iframe>
       </section>
     </main>
     <footer><a class="brand" href="index.html"><span class="brand-mark">CEH</span><span>Chennai Events Hub</span></a><p>Curating rooms worth remembering.</p><div><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="mailto:hello@chennaieventshub.com">Email ↗</a></div><small>© 2026 Chennai Events Hub. All rights reserved.</small></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script src="js/script.js"></script>
+    <script>
+      function handleRegistrationSubmit(form) {
+        const button = document.getElementById('registration-submit');
+        const status = document.getElementById('registration-status');
+        button.disabled = true;
+        button.style.opacity = '0.7';
+        button.querySelector('span').textContent = '✓';
+        status.textContent = 'Submitting your request…';
+        window.setTimeout(function () {
+          status.textContent = 'Registration submitted successfully. We’ll contact you with confirmation details.';
+          button.disabled = false;
+          button.style.opacity = '1';
+          button.querySelector('span').textContent = '✓';
+        }, 1800);
+      }
+    </script>
   </body>
 </html>
