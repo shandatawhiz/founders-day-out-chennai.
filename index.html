@@ -22,10 +22,10 @@
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="#about">The day</a><a href="#experience">Experience</a><a href="#agenda">Agenda</a><a href="#gallery">Edition 1</a><a href="#faq">FAQ</a>
       </nav>
-      <a class="nav-cta" href="https://forms.gle/GgWEvLbJXvZSb5PB7" target="_blank" rel="noopener noreferrer">Request an invite <span>↗</span></a>
+      <a class="nav-cta" href="#rsvp">Request an invite <span>↗</span></a>
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
     </header>
-    <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#about">The day</a><a href="#experience">Experience</a><a href="#agenda">Agenda</a><a href="#gallery">Edition 1</a><a href="#faq">FAQ</a><a href="https://forms.gle/GgWEvLbJXvZSb5PB7" target="_blank" rel="noopener noreferrer">Request an invite</a></nav>
+    <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#about">The day</a><a href="#experience">Experience</a><a href="#agenda">Agenda</a><a href="#gallery">Edition 1</a><a href="#faq">FAQ</a><a href="#rsvp">Request an invite</a></nav>
 
     <main>
       <section class="hero">
@@ -33,8 +33,8 @@
         <div class="eyebrow hero-eyebrow"><span class="pulse"></span> Founders Day Out · Chennai · Edition 02</div>
         <h1><span class="line">Make room for</span><span class="line serif"><em>good company.</em></span></h1>
         <p class="hero-copy">A small day out for people making things happen. No speeches or name tags. Just good conversations, great food, and friendly people.</p>
-        <div class="hero-actions"><a class="button button-primary" href="https://forms.gle/GgWEvLbJXvZSb5PB7" target="_blank" rel="noopener noreferrer">Request an invite <span>↗</span></a><a class="text-link" href="#about">Discover the day <span>↓</span></a></div>
-        <div class="hero-meta"><div><span>When</span><strong>Saturday, 26 September 2026</strong></div><div><span>Where</span><strong>Chennai <small>· shared on confirmation</small></strong></div><div><span>Seats</span><strong>15 only</strong></div></div>
+        <div class="hero-actions"><a class="button button-primary" href="#rsvp">Request an invite <span>↗</span></a><a class="text-link" href="#about">Discover the day <span>↓</span></a></div>
+        <div class="hero-meta"><div><span>When</span><strong>Sunday, 27 September 2026</strong></div><div><span>Where</span><strong>Chennai <small>· shared on confirmation</small></strong></div><div><span>Seats</span><strong>15 only</strong></div></div>
         <div class="hero-scroll">Scroll to explore <span></span></div>
       </section>
 
@@ -89,7 +89,26 @@
 
       <section class="faq section" id="faq"><div class="faq-title"><div class="section-label" data-aos="fade-up">07 / Good to know</div><h2 data-aos="fade-up">A few questions,<br /><em>answered.</em></h2></div><div class="faq-list" data-aos="fade-up"><details><summary>Who can request an invite?<span>+</span></summary><p>This day is for people who run businesses, make things, support new ideas, or enjoy meeting thoughtful people. If that sounds like you, we’d love to hear from you.</p></details><details><summary>What does the fee include?<span>+</span></summary><p>The ₹999 fee covers the whole day, including food and refreshments. Once your invite is confirmed, we’ll share everything else you need to know.</p></details><details><summary>Where in Chennai is it happening?<span>+</span></summary><p>We share the exact location with confirmed guests. It will be easy to reach and a lovely place to spend the day.</p></details><details><summary>Is this a business event?<span>+</span></summary><p>No. There are no speeches, panels, or pressure to impress anyone. It is a small gathering for honest, easy conversation.</p></details></div></section>
 
-      <section class="rsvp" id="rsvp"><div class="rsvp-glow"></div><div class="section-label">Edition 02 · Chennai</div><h2>There are only<br /><em>15 seats.</em></h2><p><strong>₹999 / person</strong><br /><em>A full day of good food, games & meaningful conversations.</em></p><a class="button button-primary rsvp-link" href="https://forms.gle/GgWEvLbJXvZSb5PB7" target="_blank" rel="noopener noreferrer">Request an invite <span>↗</span></a><p class="form-note">You will be taken to our Google Form.</p></section>
+      <section class="rsvp" id="rsvp">
+        <div class="rsvp-glow"></div>
+        <div class="section-label">Edition 02 · Chennai</div>
+        <h2>There are only<br /><em>15 seats.</em></h2>
+        <p class="rsvp-intro"><strong>₹999 / person</strong><br /><em>A full day of good food, games & meaningful conversations.</em></p>
+        <form class="invite-form" action="https://forms.gle/GgWEvLbJXvZSb5PB7" method="get" target="_blank">
+          <div class="invite-form-grid">
+            <label><span>Your full name</span><input type="text" name="full_name" autocomplete="name" required /></label>
+            <label><span>Your email address</span><input type="email" name="email" autocomplete="email" required /></label>
+            <label><span>Your WhatsApp number</span><input type="tel" name="whatsapp" autocomplete="tel" required /></label>
+            <label><span>What are you currently working on?</span><textarea name="working_on" rows="3" required></textarea></label>
+            <label><span>Why would you like to join Founders Day Out?</span><textarea name="why_join" rows="3" required></textarea></label>
+            <fieldset><legend>Can you attend on Sunday, 27 September 2026?</legend><label class="choice"><input type="radio" name="attendance" value="Yes" required /> <span>Yes</span></label><label class="choice"><input type="radio" name="attendance" value="No" /> <span>No</span></label></fieldset>
+            <fieldset><legend>Your food preference</legend><label class="choice"><input type="radio" name="food_preference" value="Vegetarian" required /> <span>Vegetarian</span></label><label class="choice"><input type="radio" name="food_preference" value="Non-vegetarian" /> <span>Non-vegetarian</span></label></fieldset>
+            <label class="consent"><input type="checkbox" name="fee_acknowledged" value="Yes" required /><span>I understand the participation fee is ₹999, including food and refreshments.</span></label>
+          </div>
+          <button class="button button-primary rsvp-link" type="submit">Submit request <span>↗</span></button>
+          <p class="form-note">Your details will be submitted through our Google Form.</p>
+        </form>
+      </section>
     </main>
     <footer><a class="brand" href="index.html"><span class="brand-mark">CEH</span><span>Chennai Events Hub</span></a><p>Curating rooms worth remembering.</p><div><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="mailto:hello@chennaieventshub.com">Email ↗</a></div><small>© 2026 Chennai Events Hub. All rights reserved.</small></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
