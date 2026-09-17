@@ -118,19 +118,46 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script src="js/script.js"></script>
     <script>
       function handleRegistrationSubmit(form) {
-        const button = document.getElementById('registration-submit');
-        const status = document.getElementById('registration-status');
-        button.disabled = true;
-        button.style.opacity = '0.7';
-        button.querySelector('span').textContent = '✓';
-        status.textContent = 'Submitting your request…';
-        window.setTimeout(function () {
-          status.textContent = 'Registration submitted successfully. We’ll contact you with confirmation details.';
-          button.disabled = false;
-          button.style.opacity = '1';
-          button.querySelector('span').textContent = '✓';
-        }, 1800);
-      }
+  const button = document.getElementById('registration-submit');
+  const status = document.getElementById('registration-status');
+
+  button.disabled = true;
+  button.style.opacity = '0.7';
+  button.querySelector('span').textContent = '…';
+  status.textContent = 'Preparing your ₹999 payment…';
+
+  // Add the action required by Apps Script
+  let actionInput = form.querySelector('input[name="action"]');
+
+  if (!actionInput) {
+    actionInput = document.createElement('input');
+    actionInput.type = 'hidden';
+    actionInput.name = 'action';
+    form.appendChild(actionInput);
+  }
+
+  actionInput.value = 'createOrder';
+
+  // Show the payment response iframe as a full-screen payment layer
+  const iframe = document.querySelector(
+    'iframe[name="registration-response"]'
+  );
+
+  if (iframe) {
+    iframe.style.display = 'block';
+    iframe.style.position = 'fixed';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+    iframe.style.background = '#090909';
+    iframe.style.zIndex = '99999';
+  }
+
+  // Submit the existing form to Apps Script
+  form.submit();
+}
     </script>
   </body>
 </html>
