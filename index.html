@@ -95,7 +95,13 @@
         <div class="section-label">Edition 02 · Chennai</div>
         <h2>There are only<br /><em>15 seats.</em></h2>
         <p class="rsvp-intro"><strong>₹999 / person</strong><br /><em>A full day of good food, games & meaningful conversations.</em></p>
-       <form
+      
+        <iframe
+  name="registration-response"
+  style="display:none;"
+></iframe>
+        
+        <form
   class="invite-form"
   action="https://script.google.com/macros/s/AKfycbzX7Br_yuGfu2GQRZICEC0E5vVSRJmbIL6b-6VEi78Kg2V3T6bI9T8QdeOt-fJAitja/exec"
   method="post"
@@ -235,21 +241,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><script src="js/script.js"></script>
    <script>
-  function handleRegistrationSubmit(form) {
-    const button = document.getElementById('registration-submit');
 
-    if (button) {
-      button.disabled = true;
-      button.style.opacity = '0.7';
+     function handleRegistrationSubmit(form) {
+  const button = document.getElementById('registration-submit');
 
-      const arrow = button.querySelector('span');
-      if (arrow) {
-        arrow.textContent = '…';
-      }
+  if (button) {
+    button.disabled = true;
+    button.style.opacity = '0.7';
+
+    const arrow = button.querySelector('span');
+    if (arrow) {
+      arrow.textContent = '…';
     }
-
-    return true;
   }
+
+  return true;
+}
+
+
+// Receive the Razorpay Payment Link from Apps Script
+window.addEventListener('message', function (event) {
+
+  if (
+    !event.data ||
+    event.data.type !== 'razorpay_payment_link'
+  ) {
+    return;
+  }
+
+  const paymentUrl = event.data.paymentUrl;
+
+  if (!paymentUrl) {
+    alert('Unable to start payment. Please try again.');
+    return;
+  }
+
+  // Open Razorpay directly
+  window.location.href = paymentUrl;
+
+});
+     
 </script>
   </body>
 </html>
