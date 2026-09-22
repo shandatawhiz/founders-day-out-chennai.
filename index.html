@@ -95,17 +95,12 @@
         <div class="section-label">Edition 02 · Chennai</div>
         <h2>There are only<br /><em>15 seats.</em></h2>
         <p class="rsvp-intro"><strong>₹999 / person</strong><br /><em>A full day of good food, games & meaningful conversations.</em></p>
-      
-        <iframe
-  name="registration-response"
-  style="display:none;"
-></iframe>
         
         <form
   class="invite-form"
   action="https://script.google.com/macros/s/AKfycbzFWQHnmMtWCSIwnkhbaYTN4eVU0GM8K_r3vzEeXwFjrJEywT5d5yz7z7uExaXNxLI/exec"
   method="post"
-  target="registration-response"
+  target="_top"
   onsubmit="handleRegistrationSubmit(this)"
 >
   <input type="hidden" name="action" value="createOrder" />
@@ -257,29 +252,6 @@
 
   return true;
 }
-
-
-// Receive the Razorpay Payment Link from Apps Script
-window.addEventListener('message', function (event) {
-
-  if (
-    !event.data ||
-    event.data.type !== 'razorpay_payment_link'
-  ) {
-    return;
-  }
-
-  const paymentUrl = event.data.paymentUrl;
-
-  if (!paymentUrl) {
-    alert('Unable to start payment. Please try again.');
-    return;
-  }
-
-  // Open Razorpay directly
-  window.location.href = paymentUrl;
-
-});
      
 </script>
   </body>
